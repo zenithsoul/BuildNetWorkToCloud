@@ -8,7 +8,7 @@ This case study explores the creation of a Software-Defined Network (SDN) using 
 
 ## Objectives
 
-- Transform ideas into real-world solutions.
+- Transform my ideas into real-world solutions.
 - Provide practical examples for aspiring Network Engineers aiming to become Network Development Engineers and Network Automation Engineers.
 - Inspire the next generation of network professionals through coding and Linux.
 
