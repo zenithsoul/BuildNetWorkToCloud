@@ -6,6 +6,14 @@ This case study explores the creation of a Software-Defined Network (SDN) using 
 - **Front-End Development:** Utilizing JavaScript for user interfaces  
 - **Open Source Technologies:** Utilizing Linux namespaces, FRRouting, and GoBGP  
 
+# My Goals: Create a Virtual Network Similar to a Cloud Network Using Open Source Tools
+
+- How to create VPCs using Linux Bridge or Open vSwitch (OVS), namespaces, and GRE on Linux (manual/automated).
+- How to create VPC peering using static routes, namespaces, and GRE on Linux (manual/automated).
+- How to create VPC endpoints using static routes, namespaces, GRE, and NAT on Linux (manual/automated).
+- How to create central VPC routing using dynamic routes, namespaces, and GRE on Linux (manual/automated).
+- How to create central VPC routing using dynamic routes, namespaces, and MPLS center services on Linux (manual/automated).
+
 ## Objectives
 
 - Transform ideas into real-world solutions  
