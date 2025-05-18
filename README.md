@@ -12,7 +12,7 @@ This case study explores the creation of a Software-Defined Network (SDN) using 
 - How to create VPC peering using static routes, namespaces, and GRE on Linux (manual/automated).
 - How to create VPC endpoints using static routes, namespaces, GRE, and NAT on Linux (manual/automated).
 - How to create central VPC routing using dynamic routes, namespaces, and GRE on Linux (manual/automated).
-- How to create central VPC routing using dynamic routes, namespaces, and MPLS Central Service on Linux (manual/automated).
+- How to create central VPC routing using dynamic routes, namespaces, and MPLS L3VPN Central Service on Linux (manual/automated).
 
 ## Objectives
 
