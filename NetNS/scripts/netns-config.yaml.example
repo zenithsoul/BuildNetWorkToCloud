@@ -1,0 +1,103 @@
+# netns-config.yaml - Network namespace configuration
+# This file defines the network topology to restore on boot
+
+namespaces:
+  - name: ns1
+  - name: ns2
+  - name: ns3
+
+veths:
+  # Connect ns1 to ns2
+  - name: veth-ns1
+    peer: veth-ns2
+    namespace: ns1
+    peer_namespace: ns2
+
+  # Connect ns2 to ns3
+  - name: veth-ns2-3
+    peer: veth-ns3
+    namespace: ns2
+    peer_namespace: ns3
+
+  # Connect ns1 to host
+  - name: veth-host
+    peer: veth-ns1-host
+    namespace: ""  # host namespace
+    peer_namespace: ns1
+
+addresses:
+  # ns1 addresses
+  - interface: veth-ns1
+    address: 10.0.1.1/24
+    namespace: ns1
+
+  - interface: veth-ns1-host
+    address: 10.0.0.2/24
+    namespace: ns1
+
+  # ns2 addresses
+  - interface: veth-ns2
+    address: 10.0.1.2/24
+    namespace: ns2
+
+  - interface: veth-ns2-3
+    address: 10.0.2.1/24
+    namespace: ns2
+
+  # ns3 addresses
+  - interface: veth-ns3
+    address: 10.0.2.2/24
+    namespace: ns3
+
+  # Host address
+  - interface: veth-host
+    address: 10.0.0.1/24
+    namespace: ""
+
+routes:
+  # ns1 default route
+  - destination: default
+    gateway: 10.0.0.1
+    namespace: ns1
+
+  # ns3 route to 10.0.1.0/24 via ns2
+  - destination: 10.0.1.0/24
+    gateway: 10.0.2.1
+    namespace: ns3
+
+  # Host route to ns1/ns2/ns3 networks
+  - destination: 10.0.1.0/24
+    gateway: 10.0.0.2
+    namespace: ""
+
+  - destination: 10.0.2.0/24
+    gateway: 10.0.0.2
+    namespace: ""
+
+bridges:
+  - name: br0
+    namespace: ""
+    ports:
+      - veth-host
+
+# GRE tunnels for peering namespaces
+gre_tunnels:
+  # GRE tunnel from ns1 to ns3 (bypassing ns2)
+  - name: gre-ns1-ns3
+    local_ip: 10.0.1.1
+    remote_ip: 10.0.2.2
+    namespace: ns1
+    key: 100          # optional: GRE key for multiplexing
+    ttl: 64           # optional: TTL (0 = inherit)
+
+  # Corresponding tunnel in ns3
+  - name: gre-ns3-ns1
+    local_ip: 10.0.2.2
+    remote_ip: 10.0.1.1
+    namespace: ns3
+    key: 100
+
+  # Tunnel IP addresses (added via addresses section)
+  # After creating GRE tunnels, assign IPs:
+  # - interface: gre-ns1-ns3, address: 192.168.100.1/30, namespace: ns1
+  # - interface: gre-ns3-ns1, address: 192.168.100.2/30, namespace: ns3
