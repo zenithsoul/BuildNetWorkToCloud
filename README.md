@@ -27,4 +27,10 @@ This case study explores the creation of a Software-Defined Network (SDN) using 
 - Utilization of Linux Bridge and Open vSwitch (OVS) for Layer 2 networking
 - Deployment of GRE, GENEVE, and VXLAN tunnels via `iproute2` to interconnect Linux namespaces
 - Integration of back-end and front-end technologies  
-- Real-world use cases and implementation examples  
+- Real-world use cases and implementation examples
+
+## Projects
+
+### [NetNS Manager](NetNS/)
+
+A Go-based CLI tool for managing Linux network namespaces, demonstrating how to build VPC (Virtual Private Cloud) functionality using open-source technologies. Features include namespace management, veth pairs, bridges, GRE tunnels, IP configuration, routing, and a REST API server.
